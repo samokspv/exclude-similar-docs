@@ -1,8 +1,8 @@
 {
-	"name": "samokspv/ExcludeSimilarDocs",
+	"name": "samokspv/exclude-similar-docs",
 	"type": "cakephp-plugin",
 	"description": "Exclude similar documents",
-	"homepage": "http://github.com/samokspv/ExcludeSimilarDocs",
+	"homepage": "http://github.com/samokspv/exclude-similar-docs",
 	"license": "MIT",
 	"require": {
 		"php": ">=5.3.0",

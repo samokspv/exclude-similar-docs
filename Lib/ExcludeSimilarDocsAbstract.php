@@ -42,6 +42,9 @@ abstract class ExcludeSimilarDocsAbstract {
 		if (isset($this->_params['allowSimilarity']) && $this->_params['allowSimilarity'] > 100) {
 			$this->_params['allowSimilarity'] = $defaultParamsType['allowSimilarity'];
 		}
+		if (isset($this->_params['length']) && empty($this->_params['length'])) {
+			$this->_params['length'] = $defaultParamsType['length'];
+		}
 	}
 
 	/**

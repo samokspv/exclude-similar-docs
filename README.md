@@ -29,6 +29,27 @@ In any place of your code:
 	
 	App::uses('ExcludeSimilarDocs', 'ExcludeSimilarDocs.Utility');
 
+	Configure::write('ExcludeSimilarDocs', array(
+		'types' => array(
+			'simple' => array(
+				'fields' => array(
+					'title',
+					'description'
+				) // documents fields for comparison
+			),
+			'shingles' => array(
+				'fields' => array(
+					'title',
+					'description'
+				), // documents fields for comparison
+				'length' => 10, // length of single shingle
+				'allowSimilarity' => 1, // alllow percent similarity documents
+				'stopWords' => array(), // your own prepositions and conjunction for clear in texts
+				'stopSymbols' => array() // your own punctuation marks, others symbols for clear in texts
+			)
+		)
+	));
+
 	For example:
 	
 	---------------

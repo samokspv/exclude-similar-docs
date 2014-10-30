@@ -2,7 +2,7 @@ ExcludeSimilarDocs
 ==================
 [![Build Status](https://travis-ci.org/samokspv/exclude-similar-docs.png)](https://travis-ci.org/samokspv/exclude-similar-docs) [![Coverage Status](https://coveralls.io/repos/samokspv/exclude-similar-docs/badge.png?branch=master)](https://coveralls.io/r/samokspv/exclude-similar-docs?branch=master) [![Latest Stable Version](https://poser.pugx.org/samokspv/exclude-similar-docs/v/stable.svg)](https://packagist.org/packages/samokspv/exclude-similar-docs) [![Total Downloads](https://poser.pugx.org/samokspv/exclude-similar-docs/downloads.svg)](https://packagist.org/packages/samokspv/exclude-similar-docs) [![Latest Unstable Version](https://poser.pugx.org/samokspv/exclude-similar-docs/v/unstable.svg)](https://packagist.org/packages/samokspv/exclude-similar-docs) [![License](https://poser.pugx.org/samokspv/exclude-similar-docs/license.svg)](https://packagist.org/packages/samokspv/exclude-similar-docs)
 
-DBConfigure plugin for CakePHP
+ExcludeSimilarDocs plugin for CakePHP
 
 Use it if you want to exclude similar documents:
 	Types exclude:

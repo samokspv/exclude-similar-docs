@@ -39,7 +39,7 @@ abstract class ExcludeSimilarDocsAbstract {
 		$defaultParamsType = $defaultParams['types'][$params['type']];
 		$this->_params = Hash::mergeDiff($params, $defaultParamsType);
 
-		if ($this->_params['allowSimilarity'] > 100) {
+		if (isset($this->_params['allowSimilarity']) && $this->_params['allowSimilarity'] > 100) {
 			$this->_params['allowSimilarity'] = $defaultParamsType['allowSimilarity'];
 		}
 	}

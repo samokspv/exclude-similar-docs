@@ -37,17 +37,11 @@ class ExcludeSimilarDocsShingles extends ExcludeSimilarDocsShinglesAbstract {
 		if (!$this->_params['length']) {
 			throw new Exception('Not found param of length');
 		}
-
-		$length = (int)$this->_params['length'];
-		$words = explode(' ', $text);
-		$countWords = count($words);
-		if ($countWords <= $length) {
-			return array(md5(implode(' ', $words)));
-		}
-		$shingles = array();
-		$countShingles = $countWords - $length;
-		for ($i = 1; $i <= $countShingles; $i++) {
-			$shingles[] = md5(implode(' ', array_slice($words, $i, $length)));
+		
+		$shingleLen = (int)$this->_params['length'];
+		$textLen = mb_strlen($text);
+		for ($start = 0; $start < $textLen; $start++) { 
+			$shingles[] = md5(mb_substr($text, $start, ($shingleLen))); 
 		}
 
 		return $shingles;

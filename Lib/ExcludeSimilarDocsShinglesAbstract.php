@@ -46,7 +46,7 @@ abstract class ExcludeSimilarDocsShinglesAbstract extends ExcludeSimilarDocsAbst
 			if (empty($Doc->{$field})) {
 				continue;
 			}
-			$text .= !empty($text) ? ' ' : '';
+			$text .= !empty($text) ? $this->_params['delimiter'] : '';
 			$text .= $Doc->{$field};
 		}
 
@@ -103,20 +103,24 @@ abstract class ExcludeSimilarDocsShinglesAbstract extends ExcludeSimilarDocsAbst
 	 * @return string
 	 */
 	protected function _canonizeText($text) {
+		$delimiter = $this->_params['delimiter'];
 		$canonizeText = array();
 		$text = strip_tags($text);
 		$text = html_entity_decode($text);
 		$text = str_replace($this->_params['stopSymbols'], null, $text);
 
-		foreach (explode(' ', $text) as $word) {
+		foreach (explode($delimiter, $text) as $word) {
 			$word = trim($word);
 			$word = strtolower($word);
 			if (!empty($word) && !in_array($word, $this->_params['stopWords'])) {
 				$canonizeText[] = $word;
 			}
 		}
-
-		return strtolower(implode(' ', $canonizeText));
+		
+		$canonizeText = implode($delimiter, $canonizeText);
+		$canonizeText = str_replace($delimiter, '', $canonizeText);
+		
+		return $canonizeText;
 	}
 
 	/**
@@ -140,22 +144,25 @@ abstract class ExcludeSimilarDocsShinglesAbstract extends ExcludeSimilarDocsAbst
 	protected function _getSimilarDocsIds() {
 		$similarDocsIds = array();
 		$shingles = $this->_getShigles();
-		$shinglesList = Hash::extract($shingles, '{n}.{n}');
-		$countsEachShingle = array_count_values($shinglesList);
 		foreach ($shingles as $docId => $shingles1Doc) {
-			$countSimilarShingles = 0;
-			foreach ($shingles1Doc as $shingleId => $shingle) {
-				if (isset($countsEachShingle[$shingle]) && $countsEachShingle[$shingle] > 1) {
-					$countSimilarShingles++;
-					unset($countsEachShingle[$shingle]);
-				}
+			$shinglesList = Hash::apply($shingles, '{n}.{n}', 'array_count_values');
+			$shingles1Doc = array_flip($shingles1Doc);
+			$shinglesEquals = array_intersect_key($shinglesList, $shingles1Doc);
+			$countSimilarShingles = array_sum($shinglesEquals) - count($shingles1Doc);
+			$countShingles1Doc = count($shingles1Doc);
+			$countShingles = (count($shingles) - 1);
+
+			if ($countSimilarShingles <= 0 || $countShingles1Doc <= 0 || $countShingles <= 0) {
+				continue;
 			}
-			$similarity = round(($countSimilarShingles / count($shingles1Doc)) * 100, 2);
+
+			$similarity = round((($countSimilarShingles / $countShingles1Doc) * 100) / ($countShingles), 2);
 			if ($similarity > $this->_params['allowSimilarity']) {
-				$similarDocsIds[$docId] = true; 
+				$similarDocsIds[$docId] = true;
+				unset($shingles[$docId]);
 			}
 		}
-
+		
 		return $similarDocsIds;
 	}
 

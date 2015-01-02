@@ -20,6 +20,7 @@ class ExcludeSimilarDocsFactory {
 	 * Returns exclude similar documents instance of certain type
 	 * 
 	 * @param  array $params
+	 * @throws Exception
 	 * 
 	 * @return object
 	 */

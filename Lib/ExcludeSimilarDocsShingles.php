@@ -29,6 +29,7 @@ class ExcludeSimilarDocsShingles extends ExcludeSimilarDocsShinglesAbstract {
 	/**
 	 * {@inheritdoc}
 	 *
+	 * @throws Exception
 	 */
 	protected function _getShinglesFromText($text) {
 		if (empty($text)) {

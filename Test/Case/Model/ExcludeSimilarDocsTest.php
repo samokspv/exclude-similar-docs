@@ -35,8 +35,8 @@ class ExcludeSimilarDocsTest extends CakeTestCase {
 	 * @dataProvider excludeProvider
 	 */
 	public function testExclude($conditions, $expected) {
-		$docs = include($this->dataPath . $conditions['fileName']);
-		$expected = include($this->dataPath . $expected['fileName']);
+		$docs = include $this->dataPath . $conditions['fileName'];
+		$expected = include $this->dataPath . $expected['fileName'];
 
 		$actual = ExcludeSimilarDocs::exclude($docs, $conditions['params']);
 

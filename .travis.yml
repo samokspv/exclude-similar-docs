@@ -1,0 +1,47 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - hhvm
+
+env:
+  global:
+    - PLUGIN_NAME=Task
+    - PLUGIN_PATH=Plugin/ExcludeSimilarDocs
+    - REQUIRE="imsamurai/cakephp-environment:dev-master phpdocumentor/phpdocumentor:2.* imsamurai/cakephp-google-chart: 1.*"
+    - DB=mysql
+    - CAKE_VERSION=2.5
+    - secure: w5IMuODF6f1khf9EAR4sNVRXp3fjWocgXAlAAdV+tfz4cqhsRiFeBtIeKrO2LHcT00op1NmO4gL9+8N4wW3Xz7Bu0tf5ZwGxMJ3Fz+mKg/Bwza1J7+/EQvMIkfOjocBNU4hoI7cHyVZ6JkB9MPuiVrhUlFsqV3JK93rcKmvAX+I=
+  matrix:
+    - CAKE_VERSION=2.4
+    - CAKE_VERSION=2.5
+
+matrix:
+  include:
+    - php: 5.4
+      env:
+        - COVERALLS=1
+    - php: 5.4
+      env:
+        - PHPCS=1
+    - php: 5.4
+      env:
+        - FOC_VALIDATE=1
+    - php: 5.5
+      env:
+        - PHPDOC=1
+        
+before_script:
+  - git clone git://github.com/imsamurai/travis-plugin-build.git --depth 1 travis
+  - chmod +x ./travis/*
+  - ./travis/before_script.sh
+
+script:
+  - ./travis/script.sh
+
+after_success:
+  - ./travis/after_success.sh
+
+notifications:
+  email: samokspv@yandex.ru

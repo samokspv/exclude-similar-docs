@@ -7,7 +7,7 @@ php:
 
 env:
   global:
-    - PLUGIN_NAME=Task
+    - PLUGIN_NAME=ExcludeSimilarDocs
     - PLUGIN_PATH=Plugin/ExcludeSimilarDocs
     - REQUIRE="imsamurai/cakephp-environment:dev-master phpdocumentor/phpdocumentor:2.* imsamurai/cakephp-google-chart: 1.*"
     - DB=mysql

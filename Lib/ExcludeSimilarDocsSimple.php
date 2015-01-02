@@ -21,8 +21,6 @@ class ExcludeSimilarDocsSimple extends ExcludeSimilarDocsAbstract {
 	 * @param  array $Docs
 	 * 
 	 * @return array
-	 * 
-	 * @todo Dynamic title/description fields
 	 */
 	public function exclude($Docs) {
 		$hashChecks = array();
